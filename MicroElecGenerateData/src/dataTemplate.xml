@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataTemplate author="fxd">
+	<items clientTable="T_PVMANAGE_INVERTER_COLLECT" serverTable="T_PVMANAGE_INVERTER_COLLECT" serverTableIdName="ID">
+		<item comment="逆变器采集ID" clientName="ID" aliasName="ID"/>
+		<item comment="逆变器ID" clientName="INVERTER_ID" aliasName="INVERTER_ID"/>
+		<item comment="小时发电量" clientName="ELEC_PROD_HOUR"/>
+		<item comment="日发电量" clientName="ELEC_PROD_DAILY"/>
+		<item comment="月发电量" clientName="ELEC_PROD_MONTH"/>
+		<item comment="年发电量" clientName="ELEC_PROD_YEAR"/>
+		<item comment="总发电量" clientName="ELEC_PROD_ALL"/>
+		<item comment="输出功率" clientName="OUTPUT_P"/>
+		<item comment="并网功率" clientName="CONNECT_P"/>
+		<item comment="峰值功率" clientName="PEAK_POWER"/>
+		<item comment="额定功率" clientName="RATED_P"/>
+		<item comment="无功功率" clientName="REACTIVE_P"/>
+		<item comment="输入电压" clientName="DC_U"/>
+		<item comment="输入电流" clientName="DC_I"/>
+		<item comment="三项交流电压UA" clientName="AC_UA"/>
+		
+		<item comment="三项交流电压UB" clientName="AC_UB"/>
+		<item comment="三项交流电压UC" clientName="AC_UC"/>
+		<item comment="三项交流电流IA" clientName="AC_IA"/>
+		<item comment="三项交流电流IB" clientName="AC_IB"/>
+		<item comment="三项交流电流IC" clientName="AC_IC"/>
+		<item comment="机内空气温度" clientName="MACHINE_TEMP"/>
+		<item comment="环境温度" clientName="AMBIENT_TEMP"/>
+		<item comment="电网频率" clientName="GRID_FRQ"/>
+		<item comment="逆变器转换效率" clientName="CONVERT_EFF"/>
+		<item comment="二氧化碳减排量" clientName="CO2_CUTS"/>
+		
+		<item comment="节约煤量" clientName="COAL_SAVE"/>
+		<item comment="折算效益" clientName="CONVERT_BENF"/>
+		<item comment="并网状态" clientName="CONNECT_STATUS"/>
+		<item comment="通讯状态" clientName="COMMUNICATE_STATUS"/>
+		<item comment="PV连接状态" clientName="PV_CONNECT_STATUS"/>
+		<item comment="警告状态" clientName="WARNING_STATUS"/>
+		<item comment="采集时间" clientName="TIME"/>
+	</items>
+
+	<items clientTable="T_PVMANAGE_METERO" serverTable="T_PVMANAGE_METERO" serverTableIdName="METERO_ID">
+		<item comment="气象数据ID" clientName="METERO_ID" aliasName="METERO_ID"/>
+		<item comment="日照强度" clientName="SUN_STRENGTH" aliasName="SUN_STRENGTH"/>
+		<item comment="风速" clientName="WIND_SPEED" aliasName="WIND_SPEED"/>
+
+		<item comment="风向" clientName="WIND_DIREC"/>
+		<item comment="面板背面温度" clientName="PANEL_TEMP"/>
+		<item comment="环境温度" clientName="AMBIEN_TEMP"/>
+		<item comment="风速等级" clientName="WIND_RATE"/>
+		<item comment="采集时间" clientName="TIME"/>
+	</items>
+	<items clientTable="T_PVMANAGE_LOG" serverTable="T_PVMANAGE_LOG" serverTableIdName="TABLE_ID">
+		<item comment="日志表名" clientName="TABLE_NAME" aliasName="TABLE_NAME"/>
+		<item comment="日志表ID" clientName="TABLE_ID" aliasName="TABLE_ID"/>
+	</items>
+</dataTemplate>
