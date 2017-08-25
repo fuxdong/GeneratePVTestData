@@ -11,7 +11,6 @@ import org.apache.commons.logging.LogFactory;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.*;
 
 /**
  * 
@@ -53,10 +52,12 @@ public class GenerateData {
 	 */
 	public static void generateInverterCollectData(){
 		String sql = "INSERT INTO T_PVMANAGE_INVERTER_COLLECT(ID,INVERTER_ID,ELEC_PROD_HOUR,ELEC_PROD_DAILY," +
-				"ELEC_PROD_MONTH,ELEC_PROD_YEAR,ELEC_PROD_ALL,OUTPUT_P,CONNECT_P,PEAK_POWER,RATED_P,REACTIVE_P,DC_U," +
-				"DC_I,AC_UA,AC_UB,AC_UC,AC_IA,AC_IB,AC_IC,MACHINE_TEMP,AMBIENT_TEMP,GRID_FRQ,CONVERT_EFF,CO2_CUTS," +
-				"COAL_SAVE,CONVERT_BENF,CONNECT_STATUS,COMMUNICATE_STATUS,PV_CONNECT_STATUS,WARNING_STATUS,TIME) " +
-				"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				"ELEC_PROD_MONTH,ELEC_PROD_YEAR,ELEC_PROD_ALL,OUTPUT_P,CONNECT_P,PEAK_POWER,REACTIVE_P," +
+				"PV1_U,PV1_I,PV2_U,PV2_I,PV3_U,PV3_I,PV4_U,PV4_I,PV5_U,PV5_I,PV6_U,PV6_I,PV7_U,PV7_I,PV8_U," +
+				"PV8_I,AC_UA,AC_UB,AC_UC,AC_IA,AC_IB,AC_IC,MACHINE_TEMP,GRID_FRQ,CONVERT_EFF,CO2_CUTS," +
+				"COAL_SAVE,CONVERT_BENF,CONNECT_STATUS,PV_CONNECT_STATUS,WARNING_STATUS,AMBIENT_TEMP," +
+				"RADIANT_QUANTITY_1,IRRADIANCE_1,RADIANT_QUANTITY_2,IRRADIANCE_2,DAMPNESS,PRESSURE,WIND_SPEED,WIND_DIR,TIME ) " +
+				"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		DBConnection conn = SqlHelper.connPool.getConnection();
 		Parameter[] params = new Parameter[32];
@@ -137,30 +138,51 @@ public class GenerateData {
 			params[7] = new Parameter("OUTPUT_P", BaseTypes.DECIMAL,1000.00 + (new BigDecimal(Math.random()*100).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
 			params[8] = new Parameter("CONNECT_P", BaseTypes.DECIMAL,1100.00 + (new BigDecimal(Math.random()*100).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
 			params[9] = new Parameter("PEAK_POWER", BaseTypes.DECIMAL,1100.00 + (new BigDecimal(Math.random()*100).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[10] = new Parameter("RATED_P", BaseTypes.DECIMAL,1300.00);
-			params[11] = new Parameter("REACTIVE_P", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[12] = new Parameter("DC_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[10] = new Parameter("REACTIVE_P", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[11] = new Parameter("PV1_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[12] = new Parameter("PV1_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[13] = new Parameter("PV2_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[14] = new Parameter("PV2_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[15] = new Parameter("PV3_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[16] = new Parameter("PV3_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[17] = new Parameter("PV4_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[18] = new Parameter("PV4_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[19] = new Parameter("PV5_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[20] = new Parameter("PV5_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[21] = new Parameter("PV6_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[22] = new Parameter("PV6_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[23] = new Parameter("PV7_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[24] = new Parameter("PV7_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[25] = new Parameter("PV8_U", BaseTypes.DECIMAL,50.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[26] = new Parameter("PV8_I", BaseTypes.DECIMAL,0.50 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
 
-			params[13] = new Parameter("DC_I", BaseTypes.DECIMAL,5.00 + (new BigDecimal(Math.random()).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[14] = new Parameter("AC_UA", BaseTypes.DECIMAL,100.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[15] = new Parameter("AC_UB", BaseTypes.DECIMAL,110.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[16] = new Parameter("AC_UC", BaseTypes.DECIMAL,120.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[17] = new Parameter("AC_IA", BaseTypes.DECIMAL,10.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[18] = new Parameter("AC_IB", BaseTypes.DECIMAL,12.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[19] = new Parameter("AC_IC", BaseTypes.DECIMAL,13.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[20] = new Parameter("MACHINE_TEMP", BaseTypes.DECIMAL,(new BigDecimal(Math.random()*40).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[21] = new Parameter("AMBIENT_TEMP", BaseTypes.DECIMAL,(new BigDecimal(Math.random()*40).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[22] = new Parameter("GRID_FRQ", BaseTypes.INTEGER,(int)(Math.random()*10 + 50));
+			params[27] = new Parameter("AC_UA", BaseTypes.DECIMAL,100.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[28] = new Parameter("AC_UB", BaseTypes.DECIMAL,110.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[29] = new Parameter("AC_UC", BaseTypes.DECIMAL,120.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[30] = new Parameter("AC_IA", BaseTypes.DECIMAL,10.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[31] = new Parameter("AC_IB", BaseTypes.DECIMAL,12.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[32] = new Parameter("AC_IC", BaseTypes.DECIMAL,13.00 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[33] = new Parameter("MACHINE_TEMP", BaseTypes.DECIMAL,(new BigDecimal(Math.random()*40).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[34] = new Parameter("GRID_FRQ", BaseTypes.INTEGER,(int)(Math.random()*10 + 50));
+			params[35] = new Parameter("CONVERT_EFF", BaseTypes.DECIMAL,0.90 + (new BigDecimal(Math.random()*0.08).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[36] = new Parameter("CO2_CUTS", BaseTypes.DECIMAL,CO2_CUTS);
+			params[37] = new Parameter("COAL_SAVE", BaseTypes.DECIMAL,COAL_SAVE);
+			params[38] = new Parameter("CONVERT_BENF", BaseTypes.DECIMAL,120.00 + (new BigDecimal(Math.random()*5).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[39] = new Parameter("CONNECT_STATUS", BaseTypes.INTEGER,1);
+			params[40] = new Parameter("PV_CONNECT_STATUS", BaseTypes.INTEGER,1);
+			params[41] = new Parameter("WARNING_STATUS", BaseTypes.INTEGER,1);
+			params[42] = new Parameter("AMBIENT_TEMP", BaseTypes.DECIMAL,(new BigDecimal(Math.random()*40).setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue()));
 
-			params[23] = new Parameter("CONVERT_EFF", BaseTypes.DECIMAL,0.90 + (new BigDecimal(Math.random()*0.08).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[24] = new Parameter("CO2_CUTS", BaseTypes.DECIMAL,CO2_CUTS);
-			params[25] = new Parameter("COAL_SAVE", BaseTypes.DECIMAL,COAL_SAVE);
-			params[26] = new Parameter("CONVERT_BENF", BaseTypes.DECIMAL,120.00 + (new BigDecimal(Math.random()*5).setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue()));
-			params[27] = new Parameter("CONNECT_STATUS", BaseTypes.INTEGER,1);
-			params[28] = new Parameter("COMMUNICATE_STATUS", BaseTypes.INTEGER,1);
-			params[29] = new Parameter("PV_CONNECT_STATUS", BaseTypes.INTEGER,1);
-			params[30] = new Parameter("WARNING_STATUS", BaseTypes.INTEGER,1);
-			params[31] = new Parameter("TIME",BaseTypes.TIMESTAMP,TIME);
+			params[43] = new Parameter("RADIANT_QUANTITY_1", BaseTypes.DECIMAL,100.00 + (new BigDecimal(Math.random()*10).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[44] = new Parameter("IRRADIANCE_1", BaseTypes.DECIMAL,20.00 + (new BigDecimal(Math.random()*10).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[45] = new Parameter("RADIANT_QUANTITY_2", BaseTypes.DECIMAL,120.00 + (new BigDecimal(Math.random()*10).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[46] = new Parameter("IRRADIANCE_2", BaseTypes.DECIMAL,15.00 + (new BigDecimal(Math.random()*10).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[47] = new Parameter("DAMPNESS", BaseTypes.DECIMAL,30.00 + (new BigDecimal(Math.random()*20).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[48] = new Parameter("PRESSURE", BaseTypes.DECIMAL,150.00 + (new BigDecimal(Math.random()*5).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[49] = new Parameter("WIND_SPEED", BaseTypes.DECIMAL,0.5 + (new BigDecimal(Math.random()*2).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+			params[50] = new Parameter("WIND_DIR", BaseTypes.DECIMAL,(new BigDecimal(Math.random()*360).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue()));
+
+			params[51] = new Parameter("TIME",BaseTypes.TIMESTAMP,TIME);
 
 			Map map = new HashMap();
 			//小时发电量
@@ -174,11 +196,11 @@ public class GenerateData {
 			//总发电量
 			map.put("ELEC_PROD_ALL",params[6].Value);
 			//碳减排量
-			map.put("CO2_CUTS",params[24].Value);
+			map.put("CO2_CUTS",params[36].Value);
 			//节约煤量
-			map.put("COAL_SAVE",params[25].Value);
+			map.put("COAL_SAVE",params[37].Value);
 			//时间
-			map.put("TIME",params[31].Value);
+			map.put("TIME",params[51].Value);
 			list.add(map);
 
 			try {
